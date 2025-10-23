@@ -1,14 +1,20 @@
 //import { Button } from "@workspace/ui/components/button"
 //import { add } from "@workspace/math/add"
 "use client";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@workspace/backend/_generated/api";
+import { Button } from "@workspace/ui/components/button";
 
 export default function Page() {
   const users = useQuery(api.users.getMany) as any[];
-  console.log("Users:", users);
+  const addUser = useMutation(api.users.createUser);
   return (
     <div className="flex items-center justify-center min-h-svh">
+      <Button
+        onClick={() => {
+          addUser();
+        }}
+      >Create</Button>
       {(users?.length > 0 &&
         users.map((user) => (
           <div key={user._id} className="p-4 m-2 border rounded">
