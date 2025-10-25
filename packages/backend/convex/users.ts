@@ -18,6 +18,8 @@ export const createUser = mutation({
     if (identity === null) {
       throw new Error("Unauthenticated");
     }
+    throw new Error("Unauthenticated");
+    
     const userId = await ctx.db.insert("users", { name: "Alex" });
     return userId;
   },
